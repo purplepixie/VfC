@@ -50,6 +50,7 @@ if($maps)
 <body onload="collapse_load()">
 <div id="everything">
 	<a href='index.php'><div id="banner">
+		<div class="contact"><a href='mailto:mail@visionsforchangenorwich.org.uk'>contact</a></div>
 		<h1><span><?php
 			echo($settings['sitename']);
 		?></span></h1>
@@ -120,22 +121,19 @@ function endhtmlpage($content='')
                 <div class="clearer">&nbsp;</div>
 
 <div id="footer">
-	<div id="contact">
-	<a href='mailto:mail@visionsforchangenorwich.org.uk'>email us</a>
-	</div>
-	
+
+	<div class="credits">
+	Design: Ian Barker, Chris Brock, Simeon Jackson
+	</div>	
 	
 	
 	<div id="tags">
-	<a href="http://validator.w3.org/check?uri=referer"><img
-            src="http://www.w3.org/Icons/valid-xhtml10-blue"
-            alt="Valid XHTML 1.0 Transitional" height="31" width="88" />
-	    </a>
-	     <a href="http://jigsaw.w3.org/css-validator/check/referer">
-                <img style="border:0;width:88px;height:31px"
-            src="http://jigsaw.w3.org/css-validator/images/vcss-blue"
-            alt="Valid CSS!" />
-            </a>
+	<a href="http://validator.w3.org/check?uri=referer">
+		<img src="http://www.w3.org/Icons/valid-xhtml10-blue" alt="Valid XHTML 1.0 Transitional" height="31" width="88" />
+	</a>
+	<a href="http://jigsaw.w3.org/css-validator/check/referer">
+		<img style="border:0;width:88px;height:31px" src="http://jigsaw.w3.org/css-validator/images/vcss-blue" lt="Valid CSS!" />
+	</a>
 	</div>
 </div>
 

@@ -346,22 +346,24 @@ p.description {
 	font-size:0.7em;
 	
 }
-#contact a:visited
-{
-	float:left;
-	margin:14px;
+div.contact {
+	float:right;
+	margin:16px 14px 14px 14px;
 	color:#FFFFFF;
 	font-size:1.4em;
-	
 }
-#contact a
+.contact a, .contact a:visited
 {
+	color:#055cf7;
+	font-size:0.7em;
+}
+div.credits {
 	float:left;
-	margin:14px;
+	margin:16px 14px 14px 14px;
 	color:#FFFFFF;
 	font-size:1.4em;
-	
 }
+
 #copy
 {
 	float:right;
