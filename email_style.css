@@ -1,0 +1,27 @@
+body  {  	/* default font */  	font-family:"Tahoma","Arial",sans-serif;  	/* default font color */  	color:black;  }
+   /* Default text settings */  
+   a {  	text-decoration:none;  	color: #055cf7;  } 
+   a:visited {  	color: #055cf7;  }   
+   h1 /* Website title in banner */  {  	font-size:2em;  	color:#064274;  	margin:14px;  }  
+   h2  /* Page titles */  {  	font-size:1.6em;  	color:black;  	margin: 10px 0px 20px 0px;  }   
+   h3  /* Subheadings on Admin page, Event titles */  {  	font-size:1.4em;  	color:black;  	margin: 0px 0px 20px 0px;  }  
+   h4  {  	font-size:1.2em;  	color:black;  	margin: 10px 0px 20px 0px;  }   
+   /* This class is used for the div element that makes up an eventbox(), called from events.php, although the code is in functions.php */ 
+   .ev  {  	margin: 8px 0px 8px 0px;  	border:1px solid #6d90ae;  	padding: 10px;  	overflow:auto;  	width: 650px;  	background-color: #FBFDFF;  }   
+   /* Used within above .ev classes for the title line */  
+   .evtitle  {  	margin:5px 5px 5px 0px;  	font-weight:bold;  	color:black;  }  
+   .evdesc {  	font-size: 10pt;  }  
+   .evtitle a  {  	color:black;  }  
+   .evdate  {  	margin:2px 2px 2px 0px;  	font-size:0.9em;  	font-weight:bold;  	color:#055cf7;  } 
+   .evgroup  {  	margin:2px 2px 2px 0px;  	font-size:0.8em;  	font-style:italic;  	color:#055cf7;  }  
+   .evloc  {  	font-style:normal;  }   /* Used within event.php to style each item */  
+   p.description {  	  }  
+   .group {  	font-weight: bold;  } 
+   .price {  	font-size:0.9em;  	font-style:italic;  }  
+   .address {  	font-weight:bold;  	margin: 8px 0px 8px 0px;  	line-height: 18pt;  }
+   .contactname {  	margin: 10px 0px 10px 0px;  } 
+   .tel {  	font-style:italic;  }
+   .dtime {  	font-weight:bold;  	color:#055cf7;  	margin: 0px 0px 10px 0px;  } 
+   .map {  	float: right;  	width: 160px;  	text-align: center;  	margin: 8px 12px 8px 12px;  	line-height: 18pt;  }  
+   .evemail {  	margin: 10px 0px 10px 0px;  	float: right;  } 
+   .evweb {  	margin: 10px 0px 10px 0px;  }  

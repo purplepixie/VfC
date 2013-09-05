@@ -1,0 +1,606 @@
+/* Things affecting the overall page and overall layout */
+html {
+	height:100%;
+}
+body
+{
+	/* default font */
+	font-family:"Tahoma","Arial",sans-serif;
+	/* default font color */
+	color:black;
+	/* This centres the page */
+	margin:0px auto 0px auto;
+	border:0px none #338bd5;
+	width: 980px;
+    height:100%;
+}
+#everything
+{
+	position: absolute;
+	min-height:100%;
+	height: auto !important;
+	height: 1000px;
+	position:relative;
+	top: 0;
+	bottom: 0;
+	background-color:#E9F5FF;
+	border-left: 1px solid #064274;
+	border-right: 1px solid #064274;
+}
+
+/* Default text settings */
+a {
+	text-decoration:none;
+	color: #055cf7;
+}
+a:visited {
+	color: #055cf7;
+}
+
+h1 /* Website title in banner */
+{
+	font-size:2em;
+	
+	color:#064274;
+	margin:14px;
+}
+
+h2  /* Page titles */
+{
+	font-size:1.6em;
+	color:black;
+	margin: 10px 0px 20px 0px;
+}
+
+h3  /* Subheadings on Admin page, Event titles */
+{
+	font-size:1.4em;
+	color:black;
+	margin: 0px 0px 20px 0px;
+}
+
+h4
+{
+	font-size:1.2em;
+	color:black;
+	margin: 10px 0px 20px 0px;
+}
+
+/* Things to do with the banner/header */
+#banner {
+	border:0px;
+	color:#055cf7;
+	padding:0px;
+	overflow:auto;
+	background-color: white;
+}
+#strap {
+	margin:14px;
+}
+
+#banner img {
+	float:right;
+	border: none;
+}
+#navigation
+{
+	border-width:0px;
+	border-top-width:1px;
+	border-bottom-width:1px;
+	border-style:solid;
+	border-color:#064274;
+	margin:0px;
+	overflow:auto;
+	color:#064274;
+	clear:both;
+	padding: none;
+	background-color: #FBFDFF;
+}
+.navbox {
+	border-width:0px;
+	border-right-width:1px;
+	border-style:solid;
+	border-color:#1467ab;
+	padding:5px;
+	margin:0px;
+	width:150px;
+	float:left;
+	text-align:center;
+	background-color: #FBFDFF;
+
+}
+a.navbox:visited {
+	color:#064274;
+	text-decoration:none;
+}
+a.navbox:hover
+{
+	text-decoration:underline;
+	background-color: #EDEFFF;
+}
+
+/* Now things relating to the main section */
+
+#layout_body
+{
+	padding:14px 14px 140px 14px;
+}
+
+#sidebar {
+	float: right;
+	width: 275px;
+	height:100%;	
+}
+
+#main {
+	width: 670px;
+}
+
+/* This class is applied to notices about unapproved events or groups. References in event.php, */
+.unapproved {
+	color:red;
+	font-size:1.4em;
+}
+
+/* This class is used for the div element that makes up an eventbox(), called from events.php, although the code is in functions.php */
+.ev
+{
+	margin: 8px 0px 8px 0px;
+	border:1px solid #6d90ae;
+	padding: 10px;
+	overflow:auto;
+	width: 650px;
+	background-color: #FBFDFF;
+}
+/* Not currently used (commented out in functions.php), but may be used in future to display an image associated with an event */
+.evimg
+{
+	width:64px;
+	height:64px;
+	float:left;
+	background-color:#bcd3ff;
+	margin:2px;
+	
+}
+/* Used within above .ev classes for the title line */
+.evtitle
+{
+	margin:5px 5px 5px 0px;
+	font-weight:bold;
+	color:black;
+}
+.evdesc {
+	font-size: 10pt;
+}
+.evtitle a
+{
+	color:black;
+}
+.evdate
+{
+	margin:2px 2px 2px 0px;
+	font-size:0.9em;
+	font-weight:bold;
+	color:#055cf7;
+}
+.evgroup
+{
+	margin:2px 2px 2px 0px;
+	font-size:0.8em;
+	font-style:italic;
+	color:#055cf7;
+}
+.evloc
+{
+	font-style:normal;
+}
+
+/* Used within event.php to style each item */
+p.description {
+	
+}
+
+.group {
+	font-weight: bold;
+}
+.price {
+	font-size:0.9em;
+	font-style:italic;
+}
+.address {
+	font-weight:bold;
+	margin: 8px 0px 8px 0px;
+	line-height: 18pt;
+}
+.contactname {
+	margin: 10px 0px 10px 0px;
+}
+.tel {
+	font-style:italic;
+}
+.dtime {
+	font-weight:bold;
+	color:#055cf7;
+	margin: 0px 0px 10px 0px;
+}
+.map {
+	float: right;
+	width: 160px;
+	text-align: center;
+	margin: 8px 12px 8px 12px;
+	line-height: 18pt;
+}
+.evemail {
+	margin: 10px 0px 10px 0px;
+	float: right;
+}
+.evweb {
+	margin: 10px 0px 10px 0px;
+}
+
+/* This section are used to style the groups boxes in groups.php */
+.divbox {
+	margin: 8px 0px 0px 0px;
+	border:1px solid #6d90ae;
+	padding: 10px;
+	overflow:auto;
+	background-color: #FBFDFF;	
+}
+.boxtype {
+	margin: 10px 20px 0px 0px;
+	font-size: 20pt;
+	font-weight: bold;
+	float: right;
+	color:  #D9DAF5;
+}
+.gpbox {
+	width: 427px;
+	min-height: 48px;
+}
+.gpbox2 {
+	width: 650px;
+}
+.gptitle {
+	margin:5px 5px 5px 0px;
+	font-weight:bold;
+	color:black;
+}
+.gptitle a {
+	color:black;
+}
+.gpdesc {
+	font-size: 10pt;
+}
+.gp {
+	float: right;
+	clear: right;
+}
+.gptag {
+	margin: 8px 0px 0px 8px;
+	border:1px solid #6d90ae;
+	padding: 20px 4px 20px 4px;
+	width: 55px;
+	height: 28px;
+	background-color: #FBFDFF;
+	text-align: center;
+	float: right;
+}
+.dumbtag {
+	margin: 8px 0px 0px 8px;
+	padding: 20px 4px 20px 4px;
+	width: 57px;
+	height: 30px;
+	float: right;	
+}
+.gpweb{
+	text-align: center;
+	margin: 10px auto 10px auto;
+}
+.eventsby {
+	margin: 8px 0px 0px 0px;
+	border:1px solid #6d90ae;
+	padding: 10px;
+	overflow:auto;
+	background-color: #ECF6F9;
+	text-align: center;
+	font-size: 14pt;
+}
+
+
+
+/* These are used to format elements that may be found in the sidebar  */
+.side {
+	width:230px;
+	padding:15px;
+	clear:right;
+	border:1px solid #6d90ae;
+	margin: 8px 10px 10px 10px;
+	background-color: #FBFDFF;
+	font-size: 12pt;
+}
+.side h3 {
+	font-size: 14pt;
+	
+}
+
+
+/* Things relating to the footer */
+#footer
+{
+	position:absolute;
+   bottom:0;
+   height:60px;
+   width:100%;
+   
+	border:0px;
+	border-bottom:10px;
+	border-style:solid;
+	background-color:#358CF7;
+	border-color:#3682D4;
+	color:white;
+	border-left: 1px solid #064274;
+	border-right: 1px solid #064274;
+	
+	padding:0px;
+	
+	font-size:0.7em;
+	
+}
+#contact a:visited
+{
+	float:left;
+	margin:14px;
+	color:#FFFFFF;
+	font-size:1.4em;
+	
+}
+#contact a
+{
+	float:left;
+	margin:14px;
+	color:#FFFFFF;
+	font-size:1.4em;
+	
+}
+#copy
+{
+	float:right;
+	clear:right;
+	margin:14px;
+	
+}
+#tags
+{
+	float:right;
+	margin:14px;
+}
+
+/* Not sure what objects are currently used, but don't want to take this out, just in case! */
+object
+{
+	width:45em;
+	height:25em;
+	border:2px;
+	border-style:solid;
+	border-color:grey;
+	
+	
+}
+
+/* CSS for controls */
+a.button {
+	-webkit-box-align: center;
+	text-align: center;
+	padding: 5px 10px 5px 10px;
+	background-color: #add0de;
+	border: 1px solid #064274;
+	-webkit-appearance: button;
+	font-size: 11pt;
+	margin: 10px 10px 10px 0px;
+}
+label {
+	font-size: 12pt;
+	
+}
+
+input {
+	padding: 5px;
+}
+
+.fullwidth input {
+	width: 670px;
+}
+
+.100pc input{
+	width: 100%;
+}
+
+.stdin
+{
+	margin:10px 10px 10px 0px;
+	padding: 5px;
+	width: 300px;
+}
+.stdbtn
+{
+	margin:10px 10px 10px 0px;
+	padding: 5px;
+}
+
+div.control
+{
+	margin:10px 10px 10px 0px;
+	padding: 5px;
+}
+
+.cal {
+	display: inline-block;
+	clear: left;
+}
+
+.timesel {
+	display: inline-block;
+	clear: right;
+	margin-left: 20px;
+}
+
+textarea
+{
+	min-height:15em;
+}
+
+/*
+
+	Errors (don't know if these are ever used)
+------------------------------------------------------------------- */
+.hidden{
+	display:none;
+}
+#errordiv{
+	color:red;
+	position:fixed;
+	margin-left:-150px;
+	top:40%;
+	width:300px;
+	left:50%;
+	font-size:1.2em;
+	font-weight:bold;
+}
+#errordiv2{
+	display:none;
+}
+
+
+/*
+
+	Calendar
+------------------------------------------------------------------- */
+
+
+table.calendar {
+	border: 1px solid #CCB;
+	margin-bottom: 2em;
+	width: 100%;
+	
+}
+table.calendar th {
+	background: #055cf7;
+	border: 1px solid #CCB;
+	color: #555;
+	
+}
+table.calendar tr {border-bottom: 1px solid #DDD;}
+table.calendar td {padding: 2px;text-align:center;cursor:default;}
+table.calendar th {padding: 2px;text-align:center;cursor:default;font-size:0.8em;}
+table.calendar td {
+	background: #055cf7;
+	border: 1px solid #DDC;
+	
+}
+
+table.calendar td.picked
+{
+	background-image:none;
+	background-color: #353530;
+	color:#5A5A50;
+	
+}
+
+table.calendar td.unavail
+{
+	background-image:none;
+	background-color: gray;
+	color: gray;
+	
+}
+
+.caldiv {
+	width:22px;
+	height:20px;
+	margin:0px;
+	overflow:visible;
+	background-image:url('cal.png');
+	display: inline-block;
+}
+
+/* Specific Classes to do with the collapsing items on the about page */
+	div.collapse{
+		display: run-in;
+	}
+		.collapse div{
+			margin: 10px 0px 12px 0px;
+			padding: 0;
+			list-style: none;
+		}
+		.collapse .more{
+			display: hidden;
+			font-style: italic;
+		}
+		.collapse span {
+			cursor: pointer;
+			cursor: hand;
+		}
+
+		
+		
+/* Fields */
+.input {
+  display: block;
+}
+.input span {
+  position: absolute;
+  padding: 5px;
+  margin-left: 3px;
+  margin-top: 0px;
+  color: #999;
+  z-index: 1;
+  cursor: text;
+  pointer-events: none;
+}
+.input input, .input textarea, .input select {
+  z-index: 0;
+  padding: 6px;
+  margin: 0px 0 10px 0;
+  font: inherit;
+  max-width: 660px;
+    -ms-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    box-sizing:border-box;
+    -webkit-box-sizing:border-box; 
+}
+/* Hack to remove Safari's extra padding. Remove if you don't care about pixel-perfection. */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    .input input, .input textarea, .input select  { padding: 4px; }
+
+}
+/* End Pretty Fields */
+
+/* widths */
+
+.w660 {
+	min-width: 660px;
+}
+
+.w660 input, .w660 textarea, .w660 select { width: 660px;}
+.w650 { width: 650px;}
+.w275, .w275 input, .w275 textarea, .w275 select  { width: 250px; }
+.w320 { width: 320px;}
+.w320 input, .w320 textarea, .w320 select  { width: 320px; }
+.w320 input { 
+	margin: 0;
+}
+.w120 input, .w120 textarea, .w120 select  { width: 120px; }
+.w100pc input { 
+	width: 100%;
+}
+
+form table {
+	margin-bottom: 15px;
+	width: 660px;
+	padding: 0;
+}
+
+form table td {
+	vertical-align: top;
+	padding: 0px;
+}

@@ -1,0 +1,23 @@
+[13-Aug-2012 21:07:09] PHP Warning:  mysql_connect() [<a href='function.mysql-connect'>function.mysql-connect</a>]: Access denied for user 'ian'@'localhost' (using password: YES) in /home/visionsf/public_html/dblink.php on line 35
+[15-Aug-2012 20:58:29] PHP Fatal error:  Call to undefined function notify() in /home/visionsf/public_html/activate.php on line 49
+[19-Aug-2012 22:03:44] PHP Fatal error:  Call to undefined function getres() in /home/visionsf/public_html/doemail.php on line 7
+[21-Aug-2012 16:51:23] PHP Fatal error:  Call to undefined function now() in /home/visionsf/public_html/submit.php on line 648
+[21-Aug-2012 16:51:53] PHP Fatal error:  Call to undefined function now() in /home/visionsf/public_html/submit.php on line 648
+[21-Aug-2012 17:25:15] PHP Parse error:  syntax error, unexpected T_ECHO in /home/visionsf/public_html/sent.php on line 25
+[21-Aug-2012 17:25:54] PHP Parse error:  syntax error, unexpected ';' in /home/visionsf/public_html/sent.php on line 25
+[21-Aug-2012 17:26:25] PHP Parse error:  syntax error, unexpected ';' in /home/visionsf/public_html/sent.php on line 25
+[21-Aug-2012 17:26:27] PHP Parse error:  syntax error, unexpected ';' in /home/visionsf/public_html/sent.php on line 25
+[21-Aug-2012 17:27:01] PHP Parse error:  syntax error, unexpected ')' in /home/visionsf/public_html/sent.php on line 26
+[21-Aug-2012 17:27:25] PHP Parse error:  syntax error, unexpected ';' in /home/visionsf/public_html/sent.php on line 30
+[21-Aug-2012 20:06:36] PHP Parse error:  syntax error, unexpected $end in /home/visionsf/public_html/activate.php on line 69
+[21-Aug-2012 20:13:14] PHP Parse error:  syntax error, unexpected T_IF in /home/visionsf/public_html/activate.php on line 54
+[21-Aug-2012 20:13:37] PHP Parse error:  syntax error, unexpected T_IF in /home/visionsf/public_html/activate.php on line 54
+[21-Aug-2012 21:50:59] PHP Fatal error:  Call to undefined function replace() in /home/visionsf/public_html/submit.php on line 581
+[21-Aug-2012 22:24:29] PHP Parse error:  syntax error, unexpected ')' in /home/visionsf/public_html/emailbody.php on line 15
+[21-Aug-2012 22:24:53] PHP Fatal error:  Call to undefined function br2nl() in /home/visionsf/public_html/emailbody.php on line 12
+[21-Aug-2012 22:50:56] PHP Parse error:  syntax error, unexpected T_VARIABLE in /home/visionsf/public_html/send.php on line 19
+[28-Aug-2012 21:34:36] PHP Fatal error:  Call to undefined function left() in /home/visionsf/public_html/submit.php on line 681
+[28-Aug-2012 21:36:01] PHP Fatal error:  Call to undefined function left() in /home/visionsf/public_html/submit.php on line 681
+[10-Sep-2012 22:24:51] PHP Parse error:  syntax error, unexpected T_VARIABLE in /home/visionsf/public_html/event.php on line 28
+[10-Sep-2012 22:25:22] PHP Parse error:  syntax error, unexpected T_VARIABLE in /home/visionsf/public_html/event.php on line 28
+[10-Sep-2012 22:59:58] PHP Parse error:  syntax error, unexpected T_VARIABLE in /home/visionsf/public_html/event.php on line 28

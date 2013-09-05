@@ -1,0 +1,27 @@
+<?php
+require_once("functions.php");
+starthtmlpage("Visions");
+echo('<h2>What is Visions For Change?</h2>');
+?>
+<div class="fpage1">
+<p>
+Visions For Change Norwich is a new resource for progressive groups in Norwich and the surrounding area. 
+Its purpose is to enhance communication between the many such groups in the area and to make it easy for anyone, 
+whether already in a group or not, to be aware of and contribute to the Norwich and district progressive scene.
+</p>
+
+<p>
+This website comprises a list of progressive groups in the area, with brief description and contact information, plus an events calendar.
+</p><p>Subscribe to our mailing list and you'll receive a weekly digest of upcoming non-commercial events in and around Norwich. Your details will remain private and you can unsubscribe at any time.
+</p>
+
+<p>
+Visions for Change also holds monthly meetings, free and open to everyone. The idea here is that face-to-face meetings are complementary to internet information and to the work of specialised groups. The meetings will avoid duplicating the work done by groups themselves but will promote cooperation and cross-fertilisation. They will be virtually business-free (once VfC is fully set up), informal (a pre-announced theme but no speaker; just a facilitated circle), and enjoyable (circle discussion period not too long, followed by time at a bar).
+</p>
+<p>
+Out most recent meeting was Tuesday 4th September at the Playhouse meeting room. The discussion subject was Education.
+</p>
+</div>
+<?php
+endhtmlpage();
+?>
