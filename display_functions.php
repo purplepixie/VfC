@@ -138,7 +138,7 @@ function eventbox($event, $full=false)
 			echo("</div>");	
 			echo("<div class='evgroup'>");
 			echo($event[group]);
-			if($event[group]!='')
+			if($event[group]!='' or $event[buildingroom]!='')
 				echo(' - ');
 			echo("<span class='evloc'>$event[buildingroom]</span>");
 			echo("</div>");			
@@ -165,7 +165,11 @@ function reventbox($event)
 		$cont.="</div>\n\r";
 		$cont.="<div style='font-size: 10pt;'>$sdesc</div>\n\r";
 		$cont.="<div style='margin:2px 2px 2px 0px;font-size:0.9em;font-weight:bold;color:#055cf7;'>";
-		$cont.="$event[startdate] at $event[hour]:$event[min]";
+		if ($event[hour]=="00" and $event[min]=="00") {
+			$cont.="$event[startdate] (all day event)";
+		} else {
+			$cont.="$event[startdate] at $event[hour]:$event[min]";
+		}
 		$cont.="</div>\n\r";	
 		$cont.="<div style='margin:2px 2px 2px 0px;font-size:0.8em;font-style:italic;color:#055cf7;'>";
 		$cont.=$event[group];
