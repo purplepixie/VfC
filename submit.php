@@ -1,12 +1,14 @@
 <?php
-// This file is called whenever a form is filled in and submitted.  It is intially called without
-// changing page, but if actions are successful, it will go to the $gotopage url as defined in
+// This file is called whenever a form is filled in and submitted.  It normally called from within a
+// script on the page containinmg the form (ajax) but can be posted to old style with the browser 
+//visiting this page. The code at the end either instucts the script or the browser to forward to the url
+// $gotopage url as defined in
 // the code.  
 // 
 // There are handlers for each possible form submitted. These are currently
 //      Adding a User (newuname)  -  Called from join.php
 //      Updating a User (updateuser)  -  Called from user_options.php
-//		Unsubscribe  -  Called from user_options.php
+//	Unsubscribe  -  Called from user_options.php
 //      Deleting a User  -  Not used at the moment
 //      Editing Postcode -  Not used at the moment
 //      Forgotten email (emailofforgotten)  -  Called from forgot.php
@@ -97,7 +99,7 @@ if($_POST['newuname']!="") {
         else
         {
             logerror("Create account email error to ".$_POST['email']." uid:$nuid");
-            $formerrors.="Sorry. Something went wrong setting up your account!!!???";
+            $formerrors.="Sorry. Something went wrong sending you an email to set up your account!!!???";
         }
     }
 }
@@ -529,6 +531,20 @@ if($_POST['eventtitle']) {
 			$formerrors.='An event with the same title and start time already exists.<br />';
 		}
 		
+		$category=dbreadystr($_POST['category']);
+		$type=dbreadystr($_POST['type']);
+		
+		if($category=='unselected')
+		{
+			$formerrors.='Please select a category.<br />';
+		}
+		if($type=='unselected')
+		{
+			$formerrors.='Please select an event type.<br />';
+		}
+		
+		//$formerrors.="TEST:$category,$type<br />";
+		
 		$group=$_POST['group']+0;
 		
 		$price=dbreadystr($_POST['price']);
@@ -557,7 +573,7 @@ if($_POST['eventtitle']) {
 		{
 			if($_POST['eid']=='')
 			{
-				if(!getres("INSERT INTO event (title,description,start,end,org,price,contactname,contactemail,tel,web,book,buildingroom,address1,address2,towncity,postcode,creator) VALUES ('$eventtitle','$description','$start','$end','$group','$price','$contactname','$contactemail','$tel','$website','$book','$buildingroom','$address1','$address2','$towncity','$postcode','$uid')"))
+				if(!getres("INSERT INTO event (title,description,start,end,org,price,contactname,contactemail,tel,web,book,buildingroom,address1,address2,towncity,postcode,creator,category,type) VALUES ('$eventtitle','$description','$start','$end','$group','$price','$contactname','$contactemail','$tel','$website','$book','$buildingroom','$address1','$address2','$towncity','$postcode','$uid','$category','$type')"))
 				{
 					$formerrors.="Failed to add group to database. Please contact the webmaster. <br />";
 				}
@@ -582,7 +598,7 @@ if($_POST['eventtitle']) {
 				}
 				else
 				{
-					if(!getres("UPDATE event SET title='$eventtitle',description='$description',start='$start',end='$end',org='$group',price='$price',contactname='$contactname',contactemail='$contactemail',tel='$tel',web='$website',book='$book',buildingroom='$buildingroom',address1='$address1',address2='$address2',towncity='$towncity',postcode='$postcode' WHERE id=".$eid))
+					if(!getres("UPDATE event SET title='$eventtitle',description='$description',start='$start',end='$end',org='$group',price='$price',contactname='$contactname',contactemail='$contactemail',tel='$tel',web='$website',book='$book',buildingroom='$buildingroom',address1='$address1',address2='$address2',towncity='$towncity',postcode='$postcode',category='$category',type='$type' WHERE id=".$eid))
 					{
 						$formerrors.="Failed to update event in database. Please contact the webmaster. <br />";
 					}
@@ -722,7 +738,8 @@ function formaturl($str)
 $formerrors.=$sessionerror;
 //If this is an ajax req then return any info required otherwise need to output a propper page
 if($_GET['ajax']=='y')
-{//ajax req
+{//ajax req - this page is being requested from a script within another page and the response will be
+//interpreted by that script.
 
     if($gotopage!='')
     {
@@ -735,7 +752,7 @@ if($_GET['ajax']=='y')
 	
 }
 else
-{
+{//Support for non javascript enabled browsers - Return either html to forward the broser to $goto or an error meassage 
     
     if($gotopage!='')
     {

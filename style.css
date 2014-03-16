@@ -28,6 +28,7 @@ body
 	border-right: 1px solid #064274;
 }
 
+
 /* Default text settings */
 a {
 	text-decoration:none;
@@ -211,6 +212,23 @@ p.description {
 	font-weight:bold;
 	margin: 8px 0px 8px 0px;
 	line-height: 18pt;
+	/*width:60%;
+	float:left;*/
+}
+
+
+
+.typecat
+{
+	font-weight:normal;
+	margin: 8px 0px 8px 0px;
+	font-size:0.7em;
+	/*width:40%;
+	float:right;*/
+}
+.typecattitle
+{
+	font-weight:bold;
 }
 .contactname {
 	margin: 10px 0px 10px 0px;
@@ -377,6 +395,11 @@ div.credits {
 	margin:14px;
 }
 
+.clearer
+{
+	clear:both;
+}
+
 /* Not sure what objects are currently used, but don't want to take this out, just in case! */
 object
 {
@@ -453,8 +476,7 @@ textarea
 
 /*
 
-	Errors (don't know if these are ever used)
-------------------------------------------------------------------- */
+	Errors - These are used esp when form input is rejected------------------------------------------------------------------- */
 .hidden{
 	display:none;
 }

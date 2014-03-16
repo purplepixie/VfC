@@ -1,7 +1,7 @@
 <?php
 
 function event_data($eid) {
-	$res=getres("SELECT id,title,description,start,end,org,price,contactname,contactemail,tel,web,book,buildingroom,address1,address2,towncity,postcode,status,creator,modby FROM event WHERE id=".$eid);
+	$res=getres("SELECT id,title,description,start,end,org,price,contactname,contactemail,tel,web,book,buildingroom,address1,address2,towncity,postcode,status,creator,modby,category,type FROM event WHERE id=".$eid);
 	$arr=mysql_fetch_array($res,MYSQL_NUM);
 
 	$data[id]=$arr[0];
@@ -63,7 +63,9 @@ function event_data($eid) {
 	$data[status]=$arr[17];
 	$data[creator]=$arr[18];
 	$data[modby]=$arr[19];
-	$data[location]=$arr[20];
+//	$data[location]=$arr[20];
+	$data[category]=$arr[20];
+	$data[type]=$arr[21];
 	
 	return $data;
 	
@@ -99,7 +101,9 @@ function eventbox($event, $full=false)
 					$end_string = "<br/>Until: $event[enddate] - $event[endhour]:$event[endmin]";
 				}
 			}
-			echo("<div class='dtime'>$from $event[startdate] - $event[hour]:$event[min]$end_string</div>");
+			echo("<div class='dtime'>$from $event[startdate] - $event[hour]:$event[min]</div>");
+			
+			
 			
 			if($event[group]!='') 
 				echo("<p class='group'>Event organised by $event[glink]</p>");
@@ -119,6 +123,8 @@ function eventbox($event, $full=false)
 			echo("<div>$event[towncity]</div>");
 			echo("<div>$event[postcode]</div>");
 			echo("</div>");
+			
+			echo("<div class='typecat'><span class='typecattitle'>Category:</span>$event[category]<br /><span class='typecattitle'>Type:</span>$event[type] </div>");
 			
 			echo("Contact: <span class='contactname'>$event[contactname]</span>");
 			if($event[tel]!='')

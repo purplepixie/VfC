@@ -1,5 +1,6 @@
 <?php
 
+
 // The functions here are to do with the appearance of forms. Functions associated with the submission of forms are found in submit.php.
 
 function startform() {
@@ -166,6 +167,8 @@ function delete_form($type, $id) {
 
 function f_edit_event($event='') {
 	global $uid;
+	global $catop;
+	global $typeop;
 	
 	startform();
 	hidden('eid',$event[id]);
@@ -200,12 +203,52 @@ function f_edit_event($event='') {
 	echo('</select></span>');
 	echo('</div>');
 	
+	echo('<div class="quarter control">');
+	echo('<label for="delsel3">Category</label><br /><span>');
+	echo('<select id="delsel3" class="nonbutton"  name="category">');
+	$optarr=array('Please select one...');
+	$optarr=array_merge($optarr,$catop);
+	$opttxtarr=array('unselected');
+	$opttxtarr=array_merge($opttxtarr,$catop);
+	
+	foreach($optarr as $b)
+	{
+		$sel='';
+		if($b==$event[category])
+			$sel='selected="selected"';
+		echo('<option '.$sel.' value="'.$b.'">'.$b.'</option>'."\n");
+	}
+	
+	echo('</select></span>');
+	echo('</div>');
+	
+	echo('<div class="quarter control">');
+	echo('<label for="delsel4">Type</label><br /><span>');
+	echo('<select id="delsel4" class="nonbutton"  name="type">');
+	
+	$optarr=array('Please select one...');
+	$optarr=array_merge($optarr,$typeop);
+	$opttxtarr=array('unselected');
+	$opttxtarr=array_merge($opttxtarr,$typeop);
+	foreach($optarr as $b)
+	{
+		$sel='';
+		if($b==$event[type])
+			$sel='selected="selected"';
+		echo('<option '.$sel.' value="'.$b.'">'.$b.'</option>'."\n");
+	}
+	
+	echo('</select></span>');
+	echo('</div>');
+	
+	
+	
 	btn('submit','submit');
 	endform();
 }
 
 function f_time($event) {
-	?><h4>Date & Time</h4><?php
+	?><h4>Date &amp; Time</h4><?php
 	
 	$id = issueId();
 

@@ -10,7 +10,13 @@ $now=time()-60*60;//less an hour for luck
 $fgroup=1*$_GET['group'];
 $fwhen=$_GET['when'];
 $fwhere=$_GET['where'];
-$where="WHERE status='approved' And start>$now";
+$fcat=$_GET['cat'];
+$ftype=$_GET['type'];
+
+
+$simplewhere="WHERE status='approved' And start>$now";
+$where=$simplewhere;
+
 $title="";
 
 if($fgroup!=0)
@@ -56,20 +62,41 @@ if($fwhere!='')
 	$title.= " in $fwhere";
 }
 
+if($fcat!='')
+{
+	$fwhere=dbreadystr($fcat);
+	$where.= " And category='$fcat'";
+	$title.= " in $fcat";
+}
+
+if($ftype!='')
+{
+	$fwhere=dbreadystr($ftype);
+	$where.= " And type='$ftype'";
+	$title.= " of type $ftype";
+}
 
 
 ?>
 <div class='side'>
 
 <h3>Filters</h3>
+<?php
 
-<div>Starting:</div>
-<ul>
-	<?php
+	
+	
+		if($where!=$simplewhere)
+		{
+			echo("<div>Remove Filters:</div>");
+			echo("<ul><li class='fillink'><a href='events.php'>Show All</a></li></ul>");
+		}
+		?>
+		<div>Starting:</div>
+		<ul>
+		<?php
 		echo("<li class='fillink'><a href='$filterstr&when=today'>Today</a></li>");
 		echo("<li class='fillink'><a href='$filterstr&when=tomorrow'>Tomorrow</a></li>");
 		echo("<li class='fillink'><a href='$filterstr&when=next7'>In the next 7 days</a></li>");
-		
 		echo("</ul>Where:<ul>");
 		$res=getres("SELECT DISTINCT buildingroom FROM event WHERE status='approved' AND start>$now GROUP BY buildingroom ORDER BY COUNT(buildingroom) DESC");
 		$lc=0;
@@ -83,10 +110,29 @@ if($fwhere!='')
 			}
 		}
 		echo("</ul>");
+	
+		
 		echo("<div>Group:</div>");
 		echo("<ul><li class='fillink'><a href='groups.php'>Groups...</a></li></ul>");
-		echo("<div>Remove Filters:</div>");
-		echo("<ul><li class='fillink'><a href='events.php'>Show All</a></li></ul>");
+		
+		echo("<div>Category:</div><ul>");
+		
+		
+		foreach( $catop as $catli)
+		{
+			$escspaces=rawurlencode($catli);//str_replace(" ","%20",$catli);
+			echo("<li class='fillink'><a href='$filterstr&cat=$escspaces'>$catli</a></li>");
+		}
+		echo("</ul>");
+		
+		echo("<div>Type:</div><ul>");
+		foreach( $typeop as $typeli)
+		{
+			$escspaces=rawurlencode($typeli);//sstr_replace(" ","%20",$typeli);
+			echo("<li class='fillink'><a href='$filterstr&type=$escspaces'>$typeli</a></li>");
+		}
+		echo("</ul>");
+		
 	?>
 </div>
 </div>
