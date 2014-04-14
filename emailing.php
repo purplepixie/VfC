@@ -8,7 +8,7 @@ function htmlmail( $to  ,  $subject  ,  $plainmessage,   $htmlmessage  ,  $addit
 	$headers = $additional_headers;
 	$headers .= "From: " . $from  . "\r\n";
     $headers .= "MIME-Version: 1.0\r\n";
-    $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+    $headers .= "Content-Type: text/html; charset=utf-8\r\n";
     // $headers .= "boundary=" . $mime_boundary_header;"
     
     // $semi_rand = md5(time());
