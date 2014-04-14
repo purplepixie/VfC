@@ -2,8 +2,8 @@
 // This defines functions getres(), getraw() and setraw(), which are functions used to communicate with the database
 
 $database = 'visionsf_visions';
-$db_username = 'visionsf_web';
-$db_password = 'gaspode28';
+$db_username = 'root';
+$db_password = '';
 $host = 'localhost';
 $connected=false;
 getres("SELECT 1");//connect wherever this file is included
@@ -37,7 +37,7 @@ function getres($query)
 
      if (! $connected)
      {
-          $link = mysql_connect($host, $db_username,$db_password) or die('Error:Could not connect: ' . mysql_error());
+          $link = mysql_connect($host, $db_username,$db_password) or die('Error:Could not connect: ');
           mysql_select_db($database);
           $connected=true;
       }

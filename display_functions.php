@@ -63,7 +63,7 @@ function event_data($eid) {
 	$data[status]=$arr[17];
 	$data[creator]=$arr[18];
 	$data[modby]=$arr[19];
-//	$data[location]=$arr[20];
+	$data[location]=$arr[20];
 	$data[category]=$arr[20];
 	$data[type]=$arr[21];
 	

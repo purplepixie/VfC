@@ -12,6 +12,6 @@ $settings['googlemapskey']='ABQIAAAAO0bwEV7MQPV8aL5h3JLCpRTJqPQMjdfZ4YAkPSqr9NQz
 
 //used for category and type filters and might be used for add edit event selects
 $catop= array('Community and education', 'Economics', 'Environment', 'Justice and injustice', 'Peace and international relations', 'Other');
-$typeop=array('Demonstration', 'Fair or exhibition', 'Meeting or planning', 'Social or network', 'Talk or discussion', 'Training or workshop', 'Workday or volunteering', 'Other');
+$typeop=array('Demonstration', 'Artistic', 'Meeting or planning', 'Social or network', 'Talk or discussion', 'Training or workshop', 'Workday or volunteering', 'Other');
 		
 ?>
