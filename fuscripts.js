@@ -3,8 +3,8 @@ var monthNames=new Array("January","February","March","April","May","June","July
 var calen=0;
 
 //preload
-pic1= new Image(100,25); 
-pic1.src="loading.gif"; 
+pic1= new Image(100,25);
+pic1.src="loading.gif";
 
 
 ajaxObject = function() {
@@ -15,19 +15,19 @@ ajaxObject = function() {
     try { return new XMLHttpRequest() } catch(e){
     throw new Error( "This browser does not support XMLHttpRequest." );
     }}}}}}
-    
+
 function ajaxsendform(that,gotopage)
 {
     var request = new ajaxObject();
-	
+
 	// alert(gotopage);
     if(gotopage != null)
 	{
 		var add = "&fwd="+gotopage;
 	}
-	
+
     request.open('POST', 'submit.php?ajax=y'+add, true);
-    
+
     request.onreadystatechange = function() {
     var done = 4, ok = 200;
     if (request.readyState == done && request.status == ok) {
@@ -44,7 +44,7 @@ function ajaxsendform(that,gotopage)
                 //but if we do
                 urlstr= new String(window.location.href);
                 if(urlstr.indexOf('#')!=-1)
-                window.location.reload();
+                    window.location.reload();
             }
             else
             {
@@ -61,27 +61,31 @@ function ajaxsendform(that,gotopage)
                     erel2.innerHTML='';
                     alert(request.responseText);
                 }
+                /*
                 if(window.Recaptcha!=undefined)
                 {
                     Recaptcha.reload();
                 }
+                */
             }
         }
         else
         {
 		 //alert("empty response");
+
             if(gotopage == null)
                 window.location.reload();
             else
             {
                 window.location.href=gotopage;
             }
+            
         }
 
 
     }
   };
-  
+
   el=that;
   var tn=el.tagName;
   tn=tn.toLowerCase();
@@ -98,13 +102,13 @@ function ajaxsendform(that,gotopage)
     {
         if(poststring!='')
             poststring+='&';
-            
+
         if( (elem[i].tagName.toLowerCase()!="input") || (elem[i].getAttribute("type").toLowerCase()!='checkbox') || (elem[i].checked) )
             poststring += elem[i].name + '=' + encodeURIComponent(elem[i].value);
     }
     //alert(poststring);
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    request.setRequestHeader("Content-length", poststring.length);
+    //request.setRequestHeader("Content-length", poststring.length); // generating an error on modern browsers
     //request.setRequestHeader("Connection", "close");
 
   request.send(poststring);
@@ -142,14 +146,14 @@ function iwriteCalendar()
      this.firstofmonth.setFullYear(this.curdate.getFullYear());
      this.firstofmonth.setMonth(this.curdate.getMonth());
      firstDay=this.firstofmonth.getDay();
-     
+
      this.lastDayInMonth.setFullYear(this.curdate.getFullYear());
      this.lastDayInMonth.setDate(1);
      this.lastDayInMonth.setMonth(this.curdate.getMonth()+1);
      this.lastDayInMonth.setDate(1);
      this.lastDayInMonth.setDate(this.lastDayInMonth.getDate()-1);
      daysInMonth=this.lastDayInMonth.getDate();
-     
+
      this.nowdate=new Date();
 	var lastd=this.nowdate.getDate();
 	var lastm=this.nowdate.getMonth();
@@ -183,16 +187,16 @@ function iwriteCalendar()
 			else*/
 				htmlstr+="' onclick=\"calen.chooseDate(" +n +",event);\"";
 		}
-		
+
 	  }
 	  htmlstr+=">" + n + "</td>";
-          
+
      }
-     
+
      for(n=0;((firstDay+daysInMonth+n)%7)!=0;n++)
           htmlstr+="<td></td>";
      htmlstr+="</tr></table>";
-     
+
      this.caldiv.innerHTML=htmlstr;
 
 }
@@ -222,12 +226,12 @@ function idate(that,inputid)
      this.writeCalendar=iwriteCalendar;
      this.chooseDate=ichooseDate;
      this.moveMonth=imoveMonth;
-     
+
      this.caldiv=that;
      this.input=document.getElementById(inputid);
-     
+
      dstr=document.getElementById(inputid).value;
-     
+
      if((dstr=='00/00/0000')||(dstr=='')||(dstr=='//'))
      {
           this.curdate=new Date();
@@ -251,16 +255,16 @@ function idate(that,inputid)
 		this.pickeddate.setMonth(this.month-1);
 		this.pickeddate.setFullYear(this.year);
      }
-     
+
      this.firstofmonth=new Date();
      this.lastDayInMonth=new Date();
-     
+
      this.writeCalendar(that);
      //document.selection.empty();
      window.getSelection().removeAllRanges();
      }
-     
-     
+
+
 }
 
 function googleloc(send)
@@ -275,13 +279,13 @@ function googleloc(send)
 	if(add.value!='')
 	{
 		var geocoder = new GClientGeocoder();
-		geocoder.getLatLng(add.value,function(point) 
+		geocoder.getLatLng(add.value,function(point)
 		{
-			if (!point) 
+			if (!point)
 			{
 				alert(add.value + " not understood by google, please try expressing your address differently.");
-			} 
-			else 
+			}
+			else
 			{
 				//add.value='';//this is so we don't repeat the geocoding sever side
 				gcd.value='yes';

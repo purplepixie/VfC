@@ -1,10 +1,10 @@
 <?php
 // This file is called whenever a form is filled in and submitted.  It normally called from within a
-// script on the page containinmg the form (ajax) but can be posted to old style with the browser 
+// script on the page containinmg the form (ajax) but can be posted to old style with the browser
 //visiting this page. The code at the end either instucts the script or the browser to forward to the url
 // $gotopage url as defined in
-// the code.  
-// 
+// the code.
+//
 // There are handlers for each possible form submitted. These are currently
 //      Adding a User (newuname)  -  Called from join.php
 //      Updating a User (updateuser)  -  Called from user_options.php
@@ -28,24 +28,20 @@ $gotopage=$_GET['fwd']; // This must be before declaring functions.php because i
 require_once("functions.php");
 
 if($_POST['newuname']!="") {
-    $privatekey = "6Le6rAUAAAAAAIcPVSzu2HPEdFOBdcwvxdlhdMTZ";
-    $resp = recaptcha_check_answer ($privatekey,
-                                    $_SERVER["REMOTE_ADDR"],
-                                    $_POST["recaptcha_challenge_field"],
-                                    $_POST["recaptcha_response_field"]);
-
-    if (!$resp->is_valid) {
-      $formerrors.='You must correctly answer the reCAPTCHA question to show that you are not a machine. <br />'."(reCAPTCHA said: " . $resp->error . ")";
+    $privatekey = "6Lcq2aAUAAAAAEAS-tRxpEHLbKMeq3t-fvONkzu-";
+    $is_valid = validate_recaptcha_2($privatekey,$_REQUEST['g-recaptcha-response']);
+    if ($is_valid) {
+      $formerrors.='You must correctly answer the reCAPTCHA question to show that you are not a machine.';
     }
 
-    if ($resp->is_valid)
+    if ($is_valid)
     {
         $newuname=dbreadystr($_POST['newuname']);
         if($newuname!=$_POST['newuname'])
             $formerrors.='The username must not contain html special characters such as pointy brackets. <br />';
         if($newuname=='')
             $formerrors.='You must enter a username. <br />';
-        
+
         if(getraw('user','id',"uname='".$newuname."'",$null)!='')
             $formerrors.='The username '.$newuname.' is already in use. <br />';
 
@@ -62,7 +58,7 @@ if($_POST['newuname']!="") {
         if(getraw('user','id',"email='".$email."'",$null)!='') {
 			$uid=getraw('user','id',"email='".$email."'",$null);
 			if(getraw('user','uname',"email='".$email."'",$null)!='') {
-				$formerrors.='The email '.$email.' already has an account. Go to the login page to login and click <a href="forgot.php">here</a> if you have forgotten your login details.<br />';				
+				$formerrors.='The email '.$email.' already has an account. Go to the login page to login and click <a href="forgot.php">here</a> if you have forgotten your login details.<br />';
 			}
 		}
         if(!validEmail($_POST['email']))
@@ -114,14 +110,14 @@ if($_POST['updateuser']!="") {
 		if($_POST['digest']=='on')
 			$digest='yes';
 		$yes='yes';
-		
+
 		if($formerrors=='')
 		{
 			setraw('user','digest',$uid,$digest,$null);
 			if($digest=='yes')
 				setraw('user','mail',$uid,$yes,$null);
 			$formerrors.="OK - Details changed!";
-		}	
+		}
 	} else {
 		$formerrors.="You must be logged in to edit your user options.";
 	}
@@ -131,8 +127,8 @@ if($_POST['unsubscribe']!="") {
 	$no='no';
 	if($uid!='') {
 		setraw('user','digest',$uid,$no,$null);
-		setraw('user','mail',$uid,$no,$null);	
-		$formerrors.="OK - Details changed!";	
+		setraw('user','mail',$uid,$no,$null);
+		$formerrors.="OK - Details changed!";
 	} else {
 		$formerrors.="You must be logged in to edit your user options.";
 	}
@@ -174,7 +170,7 @@ if($_POST['postcode'] || $_POST['lat'])
         }
         elseif($_POST['item'])
         {
-		
+
             $iid=dbreadystr($_POST['item']);
             $offererid=getraw('item','offerer',$iid,$null);
             if($offererid==$uid)
@@ -205,7 +201,7 @@ if($_POST['emailofforgotten']) {
                                     $_POST["recaptcha_challenge_field"],
                                     $_POST["recaptcha_response_field"]);
 
-    if (!$resp->is_valid) 
+    if (!$resp->is_valid)
     {
       $formerrors.='You must correctly answer the reCAPTCHA question to show that you are not a machine. <br />'."(reCAPTCHA said: " . $resp->error . ")";
     }
@@ -233,39 +229,39 @@ if($_POST['emailofforgotten']) {
     }
 }
 
-if($_POST['MAX_FILE_SIZE']!='')//picture upload 
+if($_POST['MAX_FILE_SIZE']!='')//picture upload
 {
     if($uid!='')
     {
         if($_POST['itemid'])
         {
             $iid=dbreadystr($_POST['itemid']);
-            
+
             if(getraw('item','offerer',$iid,$null)==$uid)
             {
                 $res=getres("SELECT COUNT(*) As num FROM image WHERE itemid=".$iid);
-                
+
                 $arr=mysql_fetch_array($res);
                 if($arr[0]<$settings['maxphotosperitem'])
                 {
-            
+
                     $uploaded=file_get_contents($_FILES['uploadedfile']['tmp_name']);
 
-                    
-                    
+
+
                     //now resize and save it
                     $bigim=imagecreatefromstring($uploaded);
-                    
+
                     if($bigim)
                     {
-                        
+
                         getres("INSERT INTO image (type,itemid) VALUES ('jpeg','$iid')");
                         $imid=mysql_insert_id();
                         $biw=imagesx($bigim);
                         $bih=imagesy($bigim);
-                        
+
                         $size=Array('inwhole'=>701,'inhalf'=>328,'inquarter'=>168,'infifth'=>114,'small'=>64,'tiny'=>32);
-                        
+
                         foreach($size as $szname => $siw)
                         {
                             if($siw>$biw)
@@ -279,13 +275,13 @@ if($_POST['MAX_FILE_SIZE']!='')//picture upload
                             ob_end_clean();
                             imagedestroy($smim);
                         }
-                        
+
                         $gotopage="item.php?id=".$iid;
                     }
                     else
                     {
                         $formerrors.="Error - can't interpret the file you uploaded plaese try another image - jpeg, png and gif should work.";
-                        
+
                     }
                 }
                 else
@@ -301,21 +297,21 @@ if($_POST['MAX_FILE_SIZE']!='')//picture upload
             {
                 $uploaded=file_get_contents($_FILES['uploadedfile']['tmp_name']);
 
-                
-                
+
+
                 //now resize and save it
                 $bigim=imagecreatefromstring($uploaded);
-                
+
                 if($bigim)
                 {
-                    
+
                     getres("INSERT INTO image (type,itemid) VALUES ('jpeg',0)");
                     $imid=mysql_insert_id();
                     $biw=imagesx($bigim);
                     $bih=imagesy($bigim);
-                    
+
                     $size=Array('inwhole'=>701,'inhalf'=>328,'inquarter'=>168,'infifth'=>114,'small'=>64,'tiny'=>32);
-                    
+
                     foreach($size as $szname => $siw)
                     {
                         if($siw>$biw)
@@ -330,7 +326,7 @@ if($_POST['MAX_FILE_SIZE']!='')//picture upload
                         imagedestroy($smim);
                     }
                     setraw('user','image',$uid,$imid,$null);
-                    
+
                     $gotopage="user.php?id=".$uid."#picture";
                 }
                 else
@@ -341,7 +337,7 @@ if($_POST['MAX_FILE_SIZE']!='')//picture upload
         }
         else
             $formerrors.="Error - don't know what to do with this picture";
-    
+
     }
     else
         $formerrors.="You must be logged in to upload files.";
@@ -360,7 +356,7 @@ if($_POST['replacementpassword']) {
     $password=mysql_real_escape_string(stripslashes($_POST['replacementpassword']));
     //if($password!=$_POST['replacementpassword'])
         //$formerrors.='Password must not contain html special characters such as pointy brackets. <br />';
-    
+
     if($formerrors=='')
     {
         setraw('user','password',$uid,$password,$null);
@@ -372,9 +368,9 @@ if($_POST['subemail']) {
 	if(!validEmail($_POST['subemail'])) {
             $formerrors.='The email address "'.htmlspecialchars($_POST['subemail']).'" does not appear to be valid. <br />';
 	} else {
-		
+
 		$email=dbreadystrhtmlnochange($_POST['subemail']);
-		
+
 		if(getraw('user','id',"email='".$email."'",$null)!='')
 			$formerrors.='The email '.$email.' is already registered. <br />';
 		else
@@ -414,7 +410,7 @@ if($_POST['subemail']) {
 						    //logerror("Create account email error to ".$_POST['email']." uid:$nuid");
 						    $formerrors.="Sorry. Something went wrong setting up your account!!!???";
 						}
-						
+
 					}
 				}
 			}
@@ -433,7 +429,7 @@ if($_POST['orgname']) {
 		$publicemail=($_POST['publicemail']);
 		$tel=dbreadystr($_POST['tel']);
 		$website=dbreadystr(formaturl($_POST['website']));
-			
+
 
 		if($orgname=='')
 			$formerrors.="The organisation name must not be blank (You may use your own name as a individual). <br />";
@@ -441,11 +437,11 @@ if($_POST['orgname']) {
 			// $formerrors.="The contact name must not be blank. <br />";
 		if($formerrors=='')
 		{
-			
+
 			if($_POST['gid']!='')
 			{
 				$gid=$_POST['gid']*1;
-				
+
 				if( !isgroupadmin($gid) && !ismoderator() )
 				{
 					$formerrors.="You must be logged in as an admin of this group or a moderator to do that. <br />";
@@ -477,7 +473,7 @@ if($_POST['orgname']) {
 						else
 						{
 							$gid=getraw('org','id',"orgname='".$orgname."'",$null);
-							
+
 							if(!getres("INSERT INTO groupadmin (uid,gid) VALUES ($uid,$gid)"))
 							{
 								$formerrors.="Failed to add group to database. Please contact the webmaster. <br />";
@@ -485,7 +481,7 @@ if($_POST['orgname']) {
 							else
 								$gotopage='addedorg.php?gid='.getraw('org','id',"orgname='".$orgname."'",$null);
 						}
-						
+
 					}
 					else
 						$formerrors.="You must be logged in to create a group. <br />";
@@ -498,42 +494,42 @@ if($_POST['orgname']) {
 if($_POST['eventtitle']) {
 	if($uid!='')
 	{
-	
+
 		$eventtitle=dbreadystr($_POST['eventtitle']);
 		$description=dbreadystr($_POST['description']);
-		
+
 		$notime=false;
 		$noend=false;
-		
+
 		if($_POST['starttimehour']=='--')
 			$notime=true;
-			
+
 		$start=gettimestamp($_POST['startdate'],$_POST['starttimehour'],$_POST['starttimemin']);
-		
+
 		if($_POST['endtimehour']=='--') {
 			$noend=true;
 			$end=0;
 		} else {
 			$end=gettimestamp($_POST['startdate'],$_POST['endtimehour'],$_POST['endtimemin']);
 		}
-			
-		
+
+
 		if($start<time())
 			$formerrors.='The event must start in the future.<br />';
-			
+
 		if($end<$start and $noend==false) {
 			$formerrors.='End dates (when given) must be after start date. Select hour: "--" to indicate no end date given.<br />';
 			$end=0;
 		}
-		
+
 		if( ($_POST['eid']=='') && (getraw('event','id',"title='".$eventtitle."' And start='".$start."'",$null)!='') )
 		{
 			$formerrors.='An event with the same title and start time already exists.<br />';
 		}
-		
+
 		$category=dbreadystr($_POST['category']);
 		$type=dbreadystr($_POST['type']);
-		
+
 		if($category=='unselected')
 		{
 			$formerrors.='Please select a category.<br />';
@@ -542,33 +538,33 @@ if($_POST['eventtitle']) {
 		{
 			$formerrors.='Please select an event type.<br />';
 		}
-		
+
 		//$formerrors.="TEST:$category,$type<br />";
-		
+
 		$group=$_POST['group']+0;
-		
+
 		$price=dbreadystr($_POST['price']);
 		$contactname=dbreadystr($_POST['contactname']);
 		$contactemail=dbreadystr($_POST['contactemail']);
 		$tel=dbreadystr($_POST['tel']);
 		$website=dbreadystr(formaturl($_POST['web']));
-		
-		
+
+
 		$book=dbreadystr($_POST['book']);
 		$buildingroom=dbreadystr($_POST['buildingroom']);
 		$address1=dbreadystr($_POST['address1']);
 		$address2=dbreadystr($_POST['address2']);
 		$towncity=dbreadystr($_POST['towncity']);
 		$postcode=dbreadystr($_POST['pcode']);
-		
+
 		if(''!=checkPostcode($postcode) && (!checkPostcode($postcode)) )//allow emty but not invalid postcodes
 			$formerrors.='The postcode "'.htmlspecialchars($_POST['postcode']).'" does not appear to be valid.<br />';
-		
+
 		if($_POST['contactemail']!='' and !validEmail($_POST['contactemail']))
 			$formerrors.='The email address "'.htmlspecialchars($_POST['contactemail']).'" does not appear to be valid.<br />';
 		if($eventtitle=='')
 			$formerrors.="The event title must not be blank. <br />";
-			
+
 		if($formerrors=='')
 		{
 			if($_POST['eid']=='')
@@ -591,7 +587,7 @@ if($_POST['eventtitle']) {
 			else
 			{
 				$eid=$_POST['eid']*1;
-				
+
 				if( !iseventadmin($eid) && !ismoderator() )
 				{
 					$formerrors.="You must be logged in as an admin of this event or a moderator to do that. <br />";
@@ -616,7 +612,7 @@ if($_POST['eventtitle']) {
 
 if($_POST['deleteevent']) {
 	$eid=1*$_POST['deleteevent'];
-	
+
 	if(ismoderator() || iseventadmin($eid))
 	{
 		if(!getres("UPDATE event SET status='deleted',modby='$uid' WHERE id=".$eid))
@@ -631,24 +627,24 @@ if($_POST['deleteevent']) {
 	else
 	{
 		$formerrors.="Only moderators and event admins may delete events. <br />";
-	}	
+	}
 }
 
 if($_POST['deletegroup']) {
 	$gid=1*$_POST['deletegroup'];
-	
+
 	if(ismoderator() || isgroupadmin($gid))
 	{
 		if(!getres("UPDATE org SET status='deleted',modby='$uid' WHERE id=".$gid))
 		{
 			$formerrors.="Failed to delete group in db. <br /> ";
 		}
-		
+
 		if(ismoderator())
 			$gotopage="admin.php";
 		else
 			$gotopage="group.php?id=$gid";
-			
+
 	}
 	else
 	{
@@ -658,7 +654,7 @@ if($_POST['deletegroup']) {
 
 if($_POST['approvegroup']) {
 	$gid=1*$_POST['approvegroup'];
-	
+
 	if(ismoderator())
 	{
 		if(!getres("UPDATE org SET status='approved',modby='$uid' WHERE id=".$gid))
@@ -679,7 +675,7 @@ if($_POST['approvegroup']) {
 if($_POST['approveevent'])
 {
 	$eid=1*$_POST['approveevent'];
-	
+
 	if(ismoderator())
 	{
 		if(!getres("UPDATE event SET status='approved',modby='$uid' WHERE id=".$eid))
@@ -749,11 +745,11 @@ if($_GET['ajax']=='y')
     {
         echo($formerrors);
     }
-	
+
 }
 else
-{//Support for non javascript enabled browsers - Return either html to forward the broser to $goto or an error meassage 
-    
+{//Support for non javascript enabled browsers - Return either html to forward the broser to $goto or an error meassage
+
     if($gotopage!='')
     {
 	preg_match('/([^\?]*)\?*([^#]*)/',$gotopage,$m);
@@ -780,7 +776,7 @@ else
             echo($formerrors);
             echo("<br />Please go back and reenter the information.</body></html>");
         }
-        
+
     }
 }
 //NEW HANDLERS SOULD GO ABOVE THIS SECTION - NOT HERE
